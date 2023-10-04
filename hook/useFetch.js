@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { RAPID_API_KEY } from "../Private";
 
 
-const rapidApiKey = RAPID_API_KEY = '5098ca217dmsh79cfe262eb44006p15db97jsnd2159c4130d9'
+
+const rapidApiKey=`${RAPID_API_KEY}`
 
 const useFetch = (endpoint, query) => {
     const [data, setData] = useState([])
@@ -27,6 +29,7 @@ const useFetch = (endpoint, query) => {
 
         } catch (error) {
             setError(error);
+            console.warn(error);
             alert("There was an error  while fetching")
         }
         finally {
