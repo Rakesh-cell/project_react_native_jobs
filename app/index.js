@@ -1,13 +1,14 @@
+import 'react-native-reanimated';
 import { View, ScrollView, SafeAreaView, Text, } from 'react-native'
 import React, { useState } from 'react'
 import { Stack, useRouter } from 'expo-router'
 import { COLORS, icons, images, SIZES } from "../constants/index"
 import { Nearbyjobs, Popularjobs, ScreenHeaderBtn, Welcome } from '../components'
-
+console.log("hello from app index js outside")
 const Home = () => {
     const router = useRouter();
     const [searchTerm,setSearchTerm]=useState("")
-
+    console.log("hello from app index js inside")
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
             <Stack.Screen

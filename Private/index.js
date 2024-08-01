@@ -1,0 +1,3 @@
+const RAPID_API_KEY="5098ca217dmsh79cfe262eb44006p15db97jsnd2159c4130d9"
+
+export {RAPID_API_KEY}

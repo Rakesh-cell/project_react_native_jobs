@@ -10,7 +10,7 @@ const useFetch = (endpoint, query) => {
     const [data, setData] = useState([])
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState(null);
-
+    console.log('fetch')
     const options = {
         method: 'GET',
         url: `https://jsearch.p.rapidapi.com/${endpoint}`,
@@ -25,6 +25,7 @@ const useFetch = (endpoint, query) => {
         try {
             const response = await axios.request(options)
             setData(response.data.data);
+            console.log(response.data);
             setIsLoading(false);
 
         } catch (error) {

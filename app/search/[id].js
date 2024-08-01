@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { ActivityIndicator, FlatList, Image, TouchableOpacity, View } from 'react-native'
-import { Stack, useRouter, useSearchParams } from 'expo-router'
+import { Stack, useRouter, useLocalSearchParams } from 'expo-router'
 import { Text, SafeAreaView } from 'react-native'
 import axios from 'axios'
 
@@ -11,7 +11,7 @@ import styles from '../../styles/search'
 import { RAPID_API_KEY } from '../../Private'
 
 const JobSearch = () => {
-    const params = useSearchParams();
+    const params = useLocalSearchParams();
     const router = useRouter()
 
     const [searchResult, setSearchResult] = useState([]);

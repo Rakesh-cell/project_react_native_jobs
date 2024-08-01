@@ -1,6 +1,6 @@
-import { View, Text,SafeAreaView,ScrollView,ActivityIndicator,RefreshControl} from 'react-native'
+import { View, Text,SafeAreaView,ScrollView,ActivityIndicator,RefreshControl,Share} from 'react-native'
 import React ,{useCallback,useState}from 'react'
-import { Stack,useRouter,useSearchParams } from 'expo-router'
+import { Stack,useRouter,useLocalSearchParams } from 'expo-router'
 
 import { COLORS,icons,SIZES } from '../../constants'
 import useFetch from '../../hook/useFetch'
@@ -8,7 +8,7 @@ import { Company, JobAbout, JobFooter, JobTabs, ScreenHeaderBtn, Specifics } fro
 
 const tabs=['About','Qualifications','Responsibilities']
 const JobDetails = () => {
-    const params=useSearchParams()
+    const params=useLocalSearchParams()
     const router = useRouter();
 
     const {data,isLoading,error,refetch }=useFetch('job-details',{
@@ -181,6 +181,25 @@ const JobDetails = () => {
                 break;
         }
     }
+    const onshare=async()=>{
+      try {
+        let jobLink=data[0]?.job_google_link?data[0]?.job_google_link:'https://careers.google.com/jobs/results'
+        const result = await Share.share({
+          message:`${data[0].job_title} , ${jobLink}`,
+        });
+        if (result.action === Share.sharedAction) {
+          if (result.activityType) {
+            // shared with activity type of result.activityType
+          } else {
+            // shared
+          }
+        } else if (result.action === Share.dismissedAction) {
+          // dismissed
+        }
+      } catch (error) {
+        Alert.alert(error.message);
+      }
+    }
   return (
     <SafeAreaView style={{flex:1,backgroundColor:COLORS.lightWhite}}>
         <Stack.Screen
@@ -200,7 +219,7 @@ const JobDetails = () => {
                     <ScreenHeaderBtn 
                     iconUrl={icons.share}
                     dimention='60%'
-                    // handlePress={()=>router.back()}
+                    handlePress={()=>onshare()}
                     />
                 ),
                 headerTitle:""
